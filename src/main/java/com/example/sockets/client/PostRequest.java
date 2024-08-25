@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.Socket;
-import java.net.URL;
+import javax.net.ssl.SSLSocketFactory;
 
 public class PostRequest {
 
@@ -32,7 +32,7 @@ public class PostRequest {
 
             %s""".formatted(JSON.length(), JSON);
         System.out.println("Request:\n" + request);
-        try (Socket socket = new Socket("localhost", 8080);
+        try (Socket socket = SSLSocketFactory.getDefault().createSocket("localhost", 8443);
              BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
 
             OutputStream outputStream = socket.getOutputStream();
